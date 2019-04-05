@@ -6,20 +6,21 @@ import Restaurant.Fachlogik.Tischverwaltung.Tisch;
 
 public class TischDao implements ITischDao{
 	
-	private List<Tisch> tische;
+	private ArrayList<Tisch> tische;
 	
 	public TischDao() {
+		tische = new ArrayList<Tisch>();
 		initDaten();
 	}
 
 	@Override
-	public void speichern(List<Tisch> tische) {
+	public void speichern(ArrayList<Tisch> tische) {
 		this.tische = tische;
 		
 	}
 
 	@Override
-	public List<Tisch> laden() {
+	public ArrayList<Tisch> laden() {
 		return tische;
 	}
 	

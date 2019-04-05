@@ -9,12 +9,22 @@ public class Reservierung {
 	private Time uhrzeit;
 	private int personen;
 	private String name;
+	private int tischNr;
 	
-	public Reservierung(Date datum, Time uhrzeit, int personen, String name) {
+	public Reservierung(Date datum, Time uhrzeit, int personen, String name, int tischNr) {
 		this.datum = datum;
 		this.uhrzeit = uhrzeit;
 		this.personen = personen;
 		this.name = name;
+		this.tischNr = tischNr;
+	}
+	
+	public int getTischNr() {
+		return tischNr;
+	}
+	
+	public void setTischNr(int tischNr) {
+		this.tischNr = tischNr;
 	}
 
 	public Date getDatum() {

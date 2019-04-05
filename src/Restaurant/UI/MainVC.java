@@ -15,6 +15,8 @@ public class MainVC {
 	
 	public void show() {
 		mainView.show(dataModel.getPrimaryStage());
+		
+		dataModel.getTischVerwaltung().ladeDaten();
 	}
 
 }

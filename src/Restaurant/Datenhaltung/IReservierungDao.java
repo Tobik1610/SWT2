@@ -1,12 +1,12 @@
 package Restaurant.Datenhaltung;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import Restaurant.Fachlogik.Tischverwaltung.Reservierung;
 
 public interface IReservierungDao {
 	
-	public void speichern(List<Reservierung> reservierungen);
-	public List<Reservierung> laden();
+	public void speichern(ArrayList<Reservierung> reservierungen);
+	public ArrayList<Reservierung> laden();
 
 }
