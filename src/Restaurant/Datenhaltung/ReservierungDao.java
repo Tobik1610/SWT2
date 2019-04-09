@@ -1,5 +1,11 @@
 package Restaurant.Datenhaltung;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,33 +13,60 @@ import Restaurant.Fachlogik.Tischverwaltung.Reservierung;
 
 public class ReservierungDao implements IReservierungDao {
 	
-	private ArrayList<Reservierung> reservierungen;
-	
-	public ReservierungDao() {
-		reservierungen = new ArrayList<Reservierung>();
-		initDaten();
-	}
+	private final String dateiName = "Reservierungen.ser";
 
 	@Override
 	public void speichern(ArrayList<Reservierung> reservierungen) {
-		this.reservierungen = reservierungen;
+
+		try {
+			FileOutputStream fos = new FileOutputStream(dateiName);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeInt(reservierungen.size());
+			
+			for(Reservierung reservierung : reservierungen)
+				oos.writeObject(reservierung);
+			
+			oos.close();
+			fos.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
 	public ArrayList<Reservierung> laden() {
+		ArrayList<Reservierung> reservierungen = new ArrayList<Reservierung>();
+		
+		try {
+			FileInputStream fis = new FileInputStream(dateiName);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			
+			int anzahl = ois.readInt();
+			
+			for(int i = 0; i < anzahl; i++)
+				reservierungen.add((Reservierung) ois.readObject());
+			
+			ois.close();
+			fis.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		return reservierungen;
-	}
-	
-	public void initDaten() {
-		Date datum = new Date();
-		Time uhrzeit = new Time(10000000);
-		reservierungen.add(new Reservierung(datum, uhrzeit, 4, "Schmidt", 1));
-		reservierungen.add(new Reservierung(datum, uhrzeit, 2, "Schmidt", 2));
-		reservierungen.add(new Reservierung(datum, uhrzeit, 6, "Schmidt", 3));
-		reservierungen.add(new Reservierung(datum, uhrzeit, 5, "Schmidt", 4));
-		reservierungen.add(new Reservierung(datum, uhrzeit, 4, "Schmidt", 5));
-		reservierungen.add(new Reservierung(datum, uhrzeit, 9, "Schmidt", 6));
 	}
 
 }

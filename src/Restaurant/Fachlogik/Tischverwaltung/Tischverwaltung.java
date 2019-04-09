@@ -45,8 +45,12 @@ public class Tischverwaltung {
 		reservierungDao.speichern(reservierungen);
 	}
 	
-	public List<Tisch> getFreieTische(Reservierung reservierung){
-		return null;
+	public ArrayList<Tisch> getFreieTische(Reservierung reservierung){
+		HashMap<Tisch, ArrayList<Reservierung>> freieTische = (HashMap<Tisch, ArrayList<Reservierung>>) tischReservierungen.clone();
+		
+		//TODO aussortieren der belegten Tische
+		
+		return new ArrayList(freieTische.keySet());
 	}
 	
 	public void reservieren(int tischNr, Reservierung reservierung) throws TischNichtVorhandenException {
