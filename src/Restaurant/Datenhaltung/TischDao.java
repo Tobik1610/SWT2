@@ -1,7 +1,6 @@
 package Restaurant.Datenhaltung;
 
 import java.util.ArrayList;
-import java.util.List;
 import Restaurant.Fachlogik.Tischverwaltung.Tisch;
 
 public class TischDao implements ITischDao{
@@ -16,7 +15,6 @@ public class TischDao implements ITischDao{
 	@Override
 	public void speichern(ArrayList<Tisch> tische) {
 		this.tische = tische;
-		
 	}
 
 	@Override
