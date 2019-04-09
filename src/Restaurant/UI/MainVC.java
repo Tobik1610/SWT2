@@ -1,22 +1,21 @@
 package Restaurant.UI;
 
-import Restaurant.Datenhaltung.DataModel;
-import Restaurant.Fachlogik.Tischverwaltung.Tischverwaltung;
+import Restaurant.Datenhaltung.DatenModel;
 
 public class MainVC {
 	
-	private DataModel dataModel;
+	private DatenModel datenModel;
 	private MainView mainView;
 	
-	public MainVC(DataModel dataModel) {
-		this.dataModel = dataModel;
+	public MainVC(DatenModel datenModel) {
+		this.datenModel = datenModel;
 		this.mainView = new MainView();
 	}
 	
 	public void show() {
-		mainView.show(dataModel.getPrimaryStage());
+		mainView.show(datenModel.getPrimaryStage());
 		
-		dataModel.getTischVerwaltung().ladeDaten();
+		datenModel.getTischVerwaltung().ladeDaten();
 	}
 
 }

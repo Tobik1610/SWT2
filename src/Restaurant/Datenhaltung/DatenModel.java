@@ -3,12 +3,12 @@ package Restaurant.Datenhaltung;
 import Restaurant.Fachlogik.Tischverwaltung.Tischverwaltung;
 import javafx.stage.Stage;
 
-public class DataModel {
+public class DatenModel {
 
 	private Stage primaryStage;
 	private Tischverwaltung tischverwaltung;
 	
-	public DataModel(Stage primaryStage) {
+	public DatenModel(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.tischverwaltung = new Tischverwaltung(new TischDao(), new ReservierungDao());
 	}
