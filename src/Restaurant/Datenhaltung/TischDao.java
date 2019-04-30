@@ -25,12 +25,13 @@ public class TischDao implements ITischDao{
 	public void initDaten() {
 		tische = new ArrayList<>();
 		
-		tische.add(new Tisch(1,6));
+		tische.add(new Tisch(1,2));
 		tische.add(new Tisch(2,2));
-		tische.add(new Tisch(3,6));
-		tische.add(new Tisch(4,6));
+		tische.add(new Tisch(3,2));
+		tische.add(new Tisch(4,4));
 		tische.add(new Tisch(5,4));
-		tische.add(new Tisch(6,10));
+		tische.add(new Tisch(6,6));
+		tische.add(new Tisch(7,6));
 	}
 
 }

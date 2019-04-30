@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="600.0" style="-fx-background-color: #2E2E2E;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Restaurant.UI.MainVC">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="600.0" style="-fx-background-color: #2E2E2E;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Restaurant.UI.MainController">
    <children>
       <Pane layoutX="-9.0" layoutY="-119.0" prefHeight="572.0" prefWidth="616.0" style="-fx-background-color: #2E2E2E;">
          <children>
@@ -24,7 +24,7 @@
                   </Glow>
                </effect>
             </Label>
-            <Button layoutX="56.0" layoutY="533.0" onAction="#handleButtonAction" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="reservieren">
+            <Button layoutX="56.0" layoutY="533.0" mnemonicParsing="false" onAction="#onReservieren" prefHeight="25.0" prefWidth="97.0" text="reservieren">
                <font>
                   <Font name="Century Gothic" size="14.0" />
                </font>
@@ -38,7 +38,7 @@
                   <Font name="Century Gothic" size="14.0" />
                </font>
             </Label>
-            <ListView editable="true" layoutX="4.0" layoutY="46.0" opacity="0.18" prefHeight="285.0" prefWidth="185.0" style="-fx-background-color: #f2664a;" />
+            <ListView fx:id="tischListView" editable="true" layoutX="4.0" layoutY="46.0" opacity="0.18" prefHeight="285.0" prefWidth="185.0" style="-fx-background-color: #f2664a;" />
          </children>
       </Pane>
       <DatePicker layoutX="7.0" layoutY="14.0" prefHeight="28.0" prefWidth="193.0" promptText="Datum" />
@@ -103,12 +103,12 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edf04a" height="11.0" layoutX="517.0" layoutY="368.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edf04a" height="11.0" layoutX="471.0" layoutY="368.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edf04a" height="11.0" layoutX="423.0" layoutY="368.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
-      <Button layoutX="220.0" layoutY="33.0" mnemonicParsing="false" opacity="0.0" prefHeight="77.0" prefWidth="97.0" textFill="TRANSPARENT" />
-      <Button layoutX="350.0" layoutY="97.0" mnemonicParsing="false" opacity="0.0" prefHeight="77.0" prefWidth="97.0" textFill="TRANSPARENT" />
-      <Button layoutX="479.0" layoutY="37.0" mnemonicParsing="false" opacity="0.0" prefHeight="77.0" prefWidth="97.0" textFill="TRANSPARENT" />
-      <Button layoutX="479.0" layoutY="148.0" mnemonicParsing="false" opacity="0.0" prefHeight="113.0" prefWidth="97.0" textFill="TRANSPARENT" />
-      <Button layoutX="220.0" layoutY="152.0" mnemonicParsing="false" opacity="0.0" prefHeight="113.0" prefWidth="97.0" textFill="TRANSPARENT" />
-      <Button layoutX="231.0" layoutY="294.0" mnemonicParsing="false" opacity="0.0" prefHeight="88.0" prefWidth="164.0" textFill="TRANSPARENT" />
-      <Button layoutX="406.0" layoutY="294.0" mnemonicParsing="false" opacity="0.0" prefHeight="88.0" prefWidth="164.0" textFill="TRANSPARENT" />
+      <Button fx:id="btnT1" layoutX="220.0" layoutY="33.0" mnemonicParsing="false" opacity="0.0" prefHeight="77.0" prefWidth="97.0" textFill="TRANSPARENT" />
+      <Button fx:id="btnT2" layoutX="350.0" layoutY="97.0" mnemonicParsing="false" opacity="0.0" prefHeight="77.0" prefWidth="97.0" textFill="TRANSPARENT" />
+      <Button fx:id="btnT3" layoutX="479.0" layoutY="37.0" mnemonicParsing="false" opacity="0.0" prefHeight="77.0" prefWidth="97.0" textFill="TRANSPARENT" />
+      <Button fx:id="btnT5" layoutX="479.0" layoutY="148.0" mnemonicParsing="false" opacity="0.0" prefHeight="113.0" prefWidth="97.0" textFill="TRANSPARENT" />
+      <Button fx:id="btnT4" layoutX="220.0" layoutY="152.0" mnemonicParsing="false" opacity="0.0" prefHeight="113.0" prefWidth="97.0" textFill="TRANSPARENT" />
+      <Button fx:id="btnT6" layoutX="231.0" layoutY="294.0" mnemonicParsing="false" opacity="0.0" prefHeight="88.0" prefWidth="164.0" textFill="TRANSPARENT" />
+      <Button fx:id="btnT7" layoutX="406.0" layoutY="294.0" mnemonicParsing="false" opacity="0.0" prefHeight="88.0" prefWidth="164.0" textFill="TRANSPARENT" />
    </children>
 </Pane>

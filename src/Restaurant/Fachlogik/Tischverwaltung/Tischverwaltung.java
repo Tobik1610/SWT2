@@ -61,5 +61,9 @@ public class Tischverwaltung {
 		else
 			throw new TischNichtVorhandenException(tischNr);
 	}
+	
+	public ArrayList<Reservierung> getReservierungen(){
+		return reservierungDao.laden();
+	}
 
 }

@@ -1,5 +1,6 @@
 package Restaurant.Datenhaltung;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,7 +14,7 @@ import Restaurant.Fachlogik.Tischverwaltung.Reservierung;
 
 public class ReservierungDao implements IReservierungDao {
 	
-	private final String dateiName = "Reservierungen.ser";
+	private final String dateiName = "src/Restaurant/Datenhaltung/Reservierungen.ser";
 
 	@Override
 	public void speichern(ArrayList<Reservierung> reservierungen) {
@@ -56,16 +57,9 @@ public class ReservierungDao implements IReservierungDao {
 			ois.close();
 			fis.close();
 			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		} catch (Exception e)  {
+			System.out.println("Keine Reservierungen ladbar");
+		}
 		return reservierungen;
 	}
 
