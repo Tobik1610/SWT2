@@ -58,7 +58,7 @@ public class ReservierungsController {
 		});
 
 		tfPersonen.textProperty().addListener((observable, oldText, newText) -> {
-			String regex = "\\d{0,2}| ";
+			String regex = "\\d{0,1}";//Einstellige Ziffer
 			if(Pattern.matches(regex,newText)) {
 
 				if (!newText.isEmpty())
@@ -91,20 +91,26 @@ public class ReservierungsController {
 	}
 
 	public void reservierungAktivieren() {
+		//Daten aus den Controls holen
 		LocalDate datum = dpDatum.getValue();
 		Uhrzeit uhrzeit = new Uhrzeit(Integer.parseInt(cbStunde.getSelectionModel().getSelectedItem()),
 				Integer.parseInt(cbMinute.getSelectionModel().getSelectedItem())); 
 		int personen = Integer.parseInt(tfPersonen.getText());
 		
+		//Freie Tische holen
 		ArrayList<Integer> tische = tischverwaltung.getFreieTische(datum, uhrzeit, personen);
 		cbTisch.getItems().clear();
-		for (int tisch : tische)
-			cbTisch.getItems().add("" + tisch);
-
-		cbTisch.getSelectionModel().select(0);
 		
-		cbTisch.setDisable(false);
-		btnReservieren.setDisable(false);
+		//Liste mit verf¸gbaren Tischen f¸llen und Buttons freischalten
+		if(tische.size() > 0) {
+			for (int tisch : tische)
+				cbTisch.getItems().add("" + tisch);
+
+			cbTisch.getSelectionModel().select(0);
+			
+			cbTisch.setDisable(false);
+			btnReservieren.setDisable(false);
+		}
 	}
 
 	public void reservierungDeaktivieren() {
@@ -123,15 +129,18 @@ public class ReservierungsController {
 		return bName && bPersonen && bDatum;
 	}
 
-	public void onReservieren() throws TischNichtVorhandenException {
-		// Reservieren
+	public void onReservieren(){
+		//Uhrzeit aus den Controls holen
 		Uhrzeit uhrzeit = new Uhrzeit(Integer.parseInt(cbStunde.getSelectionModel().getSelectedItem()),
 				Integer.parseInt(cbMinute.getSelectionModel().getSelectedItem()));
+		
+		//Reservierung erstellen
 		Reservierung reservierung = new Reservierung(dpDatum.getValue(), uhrzeit, tfPersonen.getText(),
 				tfName.getText(), Integer.parseInt(cbTisch.getSelectionModel().getSelectedItem()));
+		
+		// Reservieren
 		tischverwaltung.reservieren(reservierung);
 		tischverwaltung.speicherDaten();
-		System.out.println(reservierung);
 
 		// Dialog schlieﬂen
 		tfName.getScene().getWindow().hide();

@@ -28,27 +28,21 @@ public class MainController {
 	
 	@FXML
 	private Button btnT1, btnT2, btnT3, btnT4, btnT5, btnT6, btnT7, btnZurueck, btnLoeschen;
-	
-	private int aktiverTisch;
-	
 	@FXML
 	private ListView<String> tischListView;
-	
 	@FXML 
 	private DatePicker dpDatum;
-	
 	@FXML
 	private Label tischLabel;
-	
 	@FXML
 	private ImageView imgLoeschen;
 	
 	private Tischverwaltung tischverwaltung;
-	
 	private ArrayList<Reservierung> reservierungen;
+	private int aktiverTisch;
 	
 	public MainController() {
-		System.out.println("Start");		
+		tischverwaltung = new Tischverwaltung(new TischDao(), new ReservierungDao());
 	}
 	
 	@FXML
@@ -58,6 +52,7 @@ public class MainController {
 			reservierungenAktualisieren();
 		});
 		
+		//Handler für Tische setzen
 		TischHandler tischHandler = new TischHandler();
 		btnT1.setOnAction(tischHandler);
 		btnT2.setOnAction(tischHandler);
@@ -68,23 +63,26 @@ public class MainController {
 		btnT7.setOnAction(tischHandler);
 		
 		btnZurueck.setVisible(false);
-	}
-	
-	public void setTischverwaltung(Tischverwaltung tischverwaltung) {
-		this.tischverwaltung = tischverwaltung;
+		
 		reservierungenAktualisieren();
 	}
 	
 	public void reservierungenAktualisieren() {
+		//Datum aus Datepicker holen
 		LocalDate datum = dpDatum.getValue();
+		
 		if(tischverwaltung != null) {
+			//Daten laden und Liste reseten
 			tischverwaltung.ladeDaten();
 			tischListView.getItems().clear();
+			
 			if(aktiverTisch == 0) {
+				//Reservierungen zum allen Tischen holen
 				reservierungen = tischverwaltung.getReservierungen(datum);
 				for(Reservierung reservierung : reservierungen)
 					tischListView.getItems().add(reservierung.toString());	
 			}else {
+				//Reservierungen zum ausgewählten Tisch holen
 				reservierungen = tischverwaltung.getReservierungen(datum, aktiverTisch);
 				for(Reservierung reservierung : reservierungen)
 					tischListView.getItems().add(reservierung.toStringOhneTisch());	

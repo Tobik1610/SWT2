@@ -67,6 +67,8 @@ public class Tischverwaltung {
 		Arrays.fill(freie, true);
 		ArrayList<Integer> tischNummern = new ArrayList<Integer>();
 		ArrayList<Reservierung> reservierungen = getReservierungen(datum);
+		
+		//Auf Freiheit überprüfen
 		for(Reservierung res : reservierungen) {
 			if(freie[res.getTischNr()-1]) {
 				int zeit1 = res.getUhrzeit().getStunde() * 60 + res.getUhrzeit().getMinute();
@@ -90,23 +92,25 @@ public class Tischverwaltung {
 		return tischDao.laden();
 	}
 	
-	public void reservieren(Reservierung reservierung) throws TischNichtVorhandenException {
+	public void reservieren(Reservierung reservierung){
 		int tischNr = reservierung.getTischNr();
 		ArrayList<Tisch> tische = tischDao.laden();
 		
 		if(tischNr <= tischReservierungen.size())
 			tischReservierungen.get(tischNr).add(reservierung);
-		else
-			throw new TischNichtVorhandenException(tischNr);
 	}
 	
 	public ArrayList<Reservierung> getReservierungen(){
+		
+		//Alle Reservierungen laden
 		return reservierungDao.laden();
 	}
 	
 	public ArrayList<Reservierung> getReservierungen(LocalDate datum){
 		ArrayList<Reservierung> reservierungen = reservierungDao.laden();
 		ArrayList<Reservierung> res = new ArrayList<Reservierung>();
+		
+		//Alle Reservierungen zum Datum heraus filtern
 		for(Reservierung reservierung : reservierungen) {
 			if(reservierung.getDatum().equals(datum))
 				res.add(reservierung);
@@ -117,6 +121,8 @@ public class Tischverwaltung {
 	public ArrayList<Reservierung> getReservierungen(LocalDate datum, int tischNr){
 		ArrayList<Reservierung> reservierungen = getReservierungen(datum);
 		ArrayList<Reservierung> res = new ArrayList<Reservierung>();
+		
+		//Alle Reservierungen zum Tisch heraus filtern
 		for(Reservierung reservierung : reservierungen) {
 			if(reservierung.getTischNr() == tischNr)
 				res.add(reservierung);
