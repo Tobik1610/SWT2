@@ -6,14 +6,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="357.0" style="-fx-background-color: #2E2E2E;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Restaurant.UI.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="357.0" style="-fx-background-color: #2E2E2E;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Restaurant.UI.ReservierungsController">
    <children>
       <Label layoutX="55.0" layoutY="35.0" text="Neue Reservierung" textFill="WHITE">
          <font>
             <Font name="Century Gothic Italic" size="27.0" />
          </font>
       </Label>
-      <Button layoutX="116.0" layoutY="375.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="125.0" style="-fx-background-radius: 16; -fx-background-color: #F4FA58;" text="reservieren">
+      <Button fx:id="btnReservieren" disable="true" layoutX="116.0" layoutY="375.0" mnemonicParsing="false" onAction="#onReservieren" prefHeight="45.0" prefWidth="125.0" style="-fx-background-radius: 16; -fx-background-color: #F4FA58;" text="reservieren">
          <font>
             <Font name="Century Gothic" size="17.0" />
          </font>
@@ -26,40 +26,39 @@
             <Font name="Century Gothic" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="25.0" layoutY="181.0" text="Personenanzahl:" textFill="WHITE">
+      <Label layoutX="23.0" layoutY="193.0" text="Personenanzahl:" textFill="WHITE">
          <font>
             <Font name="Century Gothic" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="21.0" layoutY="231.0" text="Uhrzeit: " textFill="WHITE">
+      <Label layoutX="19.0" layoutY="241.0" text="Uhrzeit: " textFill="WHITE">
          <font>
             <Font name="Century Gothic" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="22.0" layoutY="286.0" text="Datum:" textFill="WHITE">
+      <Label layoutX="20.0" layoutY="285.0" text="Datum:" textFill="WHITE">
          <font>
             <Font name="Century Gothic" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="116.0" layoutY="128.0">
+      <TextField fx:id="tfName" layoutX="116.0" layoutY="128.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField layoutX="273.0" layoutY="185.0" prefHeight="39.0" prefWidth="67.0">
+      <TextField fx:id="tfPersonen" layoutX="273.0" layoutY="185.0" prefHeight="39.0" prefWidth="67.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField editable="false" layoutX="197.0" layoutY="243.0" prefHeight="39.0" prefWidth="143.0">
+      <DatePicker fx:id="dpDatum" layoutX="175.0" layoutY="284.0" prefHeight="25.0" prefWidth="163.0" />
+      <ChoiceBox fx:id="cbStunde" layoutX="176.0" layoutY="240.0" prefHeight="25.0" prefWidth="76.0" />
+      <ChoiceBox fx:id="cbMinute" layoutX="261.0" layoutY="240.0" prefHeight="25.0" prefWidth="76.0" />
+      <ChoiceBox fx:id="cbTisch" disable="true" layoutX="262.0" layoutY="323.0" prefHeight="25.0" prefWidth="76.0" />
+      <Label layoutX="19.0" layoutY="324.0" text="Tischnummer:" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Century Gothic" size="18.0" />
          </font>
-      </TextField>
-      <TextField editable="false" layoutX="197.0" layoutY="298.0" prefHeight="39.0" prefWidth="143.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
+      </Label>
    </children>
 </Pane>
