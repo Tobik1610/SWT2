@@ -14,7 +14,7 @@ public class Main extends Application {
 			Parent root = (Parent) loader.load();
 			
 		    primaryStage.setTitle("Reservierungssoftware"); 
-		    primaryStage.setScene(new Scene(root, 700, 500)); 
+		    primaryStage.setScene(new Scene(root, 800, 450)); 
 		    primaryStage.show(); 
 		} catch(Exception e) {
 			e.printStackTrace();

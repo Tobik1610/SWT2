@@ -42,7 +42,7 @@ public class MainController {
 	private int aktiverTisch;
 	
 	public MainController() {
-		tischverwaltung = new Tischverwaltung(new TischDao(), new ReservierungDao());
+		tischverwaltung = new Tischverwaltung();
 	}
 	
 	@FXML

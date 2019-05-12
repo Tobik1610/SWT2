@@ -3,34 +3,35 @@ package Restaurant.Fachlogik.Tischverwaltung;
 import java.io.Serializable;
 import java.time.LocalDate;
 import Restaurant.Fachlogik.Uhrzeit;
+import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
 
-public class Reservierung implements Serializable{
-	
-	private static int anzahl = 1;
+public class Reservierung implements Serializable {
+
+	private static int ID = 1;
 	private int id;
 	private LocalDate datum;
 	private Uhrzeit uhrzeit;
 	private String personen;
-	private String name;
+	private Kunde kunde;
 	private int tischNr;
-	
-	public Reservierung(LocalDate datum, Uhrzeit uhrzeit, String personen, String name, int tischNr) {
-		this.id = anzahl++;
+
+	public Reservierung(LocalDate datum, Uhrzeit uhrzeit, String personen, Kunde kunde, int tischNr) {
+		this.id = ID++;
 		this.datum = datum;
 		this.uhrzeit = uhrzeit;
 		this.personen = personen;
-		this.name = name;
+		this.kunde = kunde;
 		this.tischNr = tischNr;
 	}
-	
+
 	public int getId() {
 		return this.id;
 	}
-	
+
 	public int getTischNr() {
 		return tischNr;
 	}
-	
+
 	public void setTischNr(int tischNr) {
 		this.tischNr = tischNr;
 	}
@@ -59,20 +60,20 @@ public class Reservierung implements Serializable{
 		this.personen = personen;
 	}
 
-	public String getName() {
-		return name;
+	public Kunde getKunde() {
+		return kunde;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setKunde(Kunde kunde) {
+		this.kunde = kunde;
 	}
-	
+
 	public String toString() {
-		return "Tisch: "+tischNr+" "+name+" "+uhrzeit+" ("+personen+")";
+		return "Tisch: " + tischNr + " " + kunde + " " + uhrzeit + " (" + personen + ")";
 	}
-	
+
 	public String toStringOhneTisch() {
-		return ""+name+" "+uhrzeit+" ("+personen+")";
+		return "" + kunde + " " + uhrzeit + " (" + personen + ")";
 	}
 
 }

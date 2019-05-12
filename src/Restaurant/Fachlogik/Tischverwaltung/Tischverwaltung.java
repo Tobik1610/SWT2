@@ -9,6 +9,8 @@ import java.util.List;
 import Restaurant.Ausnahmen.TischNichtVorhandenException;
 import Restaurant.Datenhaltung.IReservierungDao;
 import Restaurant.Datenhaltung.ITischDao;
+import Restaurant.Datenhaltung.ReservierungDao;
+import Restaurant.Datenhaltung.TischDao;
 import Restaurant.Fachlogik.Uhrzeit;
 
 public class Tischverwaltung {
@@ -17,9 +19,9 @@ public class Tischverwaltung {
 	private IReservierungDao reservierungDao;
 	private HashMap<Integer, ArrayList<Reservierung>> tischReservierungen;
 	
-	public Tischverwaltung(ITischDao tischDao, IReservierungDao reservierungDao) {
-		this.tischDao = tischDao;
-		this.reservierungDao = reservierungDao;
+	public Tischverwaltung() {
+		this.tischDao = new TischDao();
+		this.reservierungDao = new ReservierungDao();
 		tischReservierungen = new HashMap<Integer, ArrayList<Reservierung>>();
 		ladeDaten();
 	}

@@ -1,6 +1,8 @@
 package Restaurant.Datenhaltung;
 
 import java.util.ArrayList;
+import Restaurant.Fachlogik.Tischverwaltung.EckigerTisch;
+import Restaurant.Fachlogik.Tischverwaltung.RunderTisch;
 import Restaurant.Fachlogik.Tischverwaltung.Tisch;
 
 public class TischDao implements ITischDao{
@@ -23,15 +25,15 @@ public class TischDao implements ITischDao{
 	}
 	
 	public void initDaten() {
-		tische = new ArrayList<>();
+		tische = new ArrayList<Tisch>();
 		
-		tische.add(new Tisch(1,2));
-		tische.add(new Tisch(2,2));
-		tische.add(new Tisch(3,2));
-		tische.add(new Tisch(4,4));
-		tische.add(new Tisch(5,4));
-		tische.add(new Tisch(6,6));
-		tische.add(new Tisch(7,6));
+		tische.add(new EckigerTisch(1,2));
+		tische.add(new RunderTisch(2,2));
+		tische.add(new EckigerTisch(3,2));
+		tische.add(new EckigerTisch(4,4));
+		tische.add(new EckigerTisch(5,4));
+		tische.add(new EckigerTisch(6,6));
+		tische.add(new EckigerTisch(7,6));
 	}
 
 }
