@@ -92,7 +92,7 @@ public class MainController {
 
 	public void onReservieren() {
 		try {
-			new Reservierungsfenster();
+			new ReservierungsView();
 			reservierungenAktualisieren();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

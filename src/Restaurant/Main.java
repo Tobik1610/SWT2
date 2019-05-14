@@ -1,5 +1,6 @@
 package Restaurant;
 	
+import Restaurant.UI.MainView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -9,16 +10,7 @@ import javafx.scene.Scene;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("UI/mainview.fxml")); 
-			Parent root = (Parent) loader.load();
-			
-		    primaryStage.setTitle("Reservierungssoftware"); 
-		    primaryStage.setScene(new Scene(root, 800, 450)); 
-		    primaryStage.show(); 
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+		new MainView(primaryStage);
 	}
 	
 	public static void main(String[] args) {

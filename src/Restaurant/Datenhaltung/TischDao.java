@@ -28,7 +28,7 @@ public class TischDao implements ITischDao{
 		tische = new ArrayList<Tisch>();
 		
 		tische.add(new EckigerTisch(1,2));
-		tische.add(new RunderTisch(2,2));
+		tische.add(new RunderTisch(2,3));
 		tische.add(new EckigerTisch(3,2));
 		tische.add(new EckigerTisch(4,4));
 		tische.add(new EckigerTisch(5,4));

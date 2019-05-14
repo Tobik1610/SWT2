@@ -4,17 +4,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-import Restaurant.Ausnahmen.TischNichtVorhandenException;
-import Restaurant.Datenhaltung.ReservierungDao;
-import Restaurant.Datenhaltung.TischDao;
 import Restaurant.Fachlogik.Uhrzeit;
 import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
 import Restaurant.Fachlogik.Kundenverwaltung.Kundenverwaltung;
 import Restaurant.Fachlogik.Tischverwaltung.Reservierung;
-import Restaurant.Fachlogik.Tischverwaltung.Tisch;
 import Restaurant.Fachlogik.Tischverwaltung.Tischverwaltung;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -24,8 +18,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
 
 public class ReservierungsController {
@@ -196,7 +188,7 @@ public class ReservierungsController {
 	
 	public void onNeuerKunde() {
 		try {
-			new Kundenfenster();
+			new KundenView();
 			aktualisiereKunden();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
