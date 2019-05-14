@@ -42,7 +42,7 @@ public class MainController {
 	private int aktiverTisch;
 	
 	public MainController() {
-		tischverwaltung = new Tischverwaltung(new TischDao(), new ReservierungDao());
+		tischverwaltung = new Tischverwaltung();
 	}
 	
 	@FXML
@@ -92,7 +92,7 @@ public class MainController {
 
 	public void onReservieren() {
 		try {
-			new Reservierungsfenster();
+			new ReservierungsView();
 			reservierungenAktualisieren();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="366.0" prefWidth="850.0" style="-fx-background-color: #2E2E2E;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Restaurant.UI.KundenController">
+   <children>
+      <Label layoutX="108.0" layoutY="36.0" text="Neuer Kunde" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic Italic" size="27.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnAnlegen" disable="true" layoutX="138.0" layoutY="283.0" mnemonicParsing="false" onAction="#onAnlegen" prefHeight="45.0" prefWidth="125.0" style="-fx-background-radius: 16; -fx-background-color: #F4FA58;" text="anlegen">
+         <font>
+            <Font name="Century Gothic" size="17.0" />
+         </font>
+         <effect>
+            <DropShadow height="86.23" radius="84.1275" width="252.28" />
+         </effect>
+      </Button>
+      <Label layoutX="23.0" layoutY="136.0" text="Vorname:" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="193.0" text="Nachname:" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfVorname" layoutX="139.0" layoutY="128.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tfNachname" layoutX="139.0" layoutY="185.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tfOrt" layoutX="536.0" layoutY="107.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="452.0" layoutY="114.0" text="Ort:" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfPlz" layoutX="536.0" layoutY="165.0" prefHeight="39.0" prefWidth="112.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="452.0" layoutY="172.0" text="PLZ:" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfStrasse" layoutX="536.0" layoutY="222.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="452.0" layoutY="229.0" text="Strasse:" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfHausNr" layoutX="536.0" layoutY="286.0" prefHeight="39.0" prefWidth="63.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="452.0" layoutY="293.0" text="HausNr:" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="23.0" fitWidth="32.0" layoutX="340.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Ressourcen/Bilder/haus.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="596.0" layoutY="36.0" text="Adresse" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic Italic" size="27.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnAdresse" layoutX="340.0" layoutY="236.0" mnemonicParsing="false" onAction="#onAdresseEinblenden" opacity="0.0" prefHeight="25.0" prefWidth="23.0" />
+   </children>
+</Pane>

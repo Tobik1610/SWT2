@@ -1,6 +1,6 @@
 package Restaurant.Fachlogik.Tischverwaltung;
 
-public class Tisch {
+public abstract class Tisch {
 	
 	private int tischNr;
 	private int sitzplaetze;

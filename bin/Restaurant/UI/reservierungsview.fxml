@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="357.0" style="-fx-background-color: #2E2E2E;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Restaurant.UI.ReservierungsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="388.0" style="-fx-background-color: #2E2E2E;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Restaurant.UI.ReservierungsController">
    <children>
       <Label layoutX="55.0" layoutY="35.0" text="Neue Reservierung" textFill="WHITE">
          <font>
@@ -41,11 +42,6 @@
             <Font name="Century Gothic" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="tfName" layoutX="116.0" layoutY="128.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
       <TextField fx:id="tfPersonen" layoutX="273.0" layoutY="185.0" prefHeight="39.0" prefWidth="67.0">
          <font>
             <Font size="18.0" />
@@ -60,5 +56,16 @@
             <Font name="Century Gothic" size="18.0" />
          </font>
       </Label>
+      <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="346.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Ressourcen/Bilder/kunde.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnKunde" layoutX="346.0" layoutY="135.0" mnemonicParsing="false" onAction="#onNeuerKunde" opacity="0.0" prefHeight="25.0" prefWidth="25.0">
+         <tooltip>
+            <Tooltip text="Neuen Kunden erfassen" />
+         </tooltip>
+      </Button>
+      <ComboBox fx:id="cbKunde" layoutX="129.0" layoutY="131.0" prefHeight="34.0" prefWidth="211.0" />
    </children>
 </Pane>
