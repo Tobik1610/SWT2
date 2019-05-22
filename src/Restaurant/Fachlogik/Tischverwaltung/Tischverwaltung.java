@@ -4,9 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-
-import Restaurant.Ausnahmen.TischNichtVorhandenException;
 import Restaurant.Datenhaltung.IReservierungDao;
 import Restaurant.Datenhaltung.ITischDao;
 import Restaurant.Datenhaltung.ReservierungDao;
@@ -36,6 +33,7 @@ public class Tischverwaltung {
 			}
 		}
 		tischReservierungen.get(reservierung.getTischNr()).remove(r);
+		getTisch(reservierung.getTischNr()).veringereAnzReservierungen();
 			
 		speicherDaten();
 	}
@@ -92,6 +90,15 @@ public class Tischverwaltung {
 	
 	public ArrayList<Tisch> getTische(){
 		return tischDao.laden();
+	}
+	
+	public Tisch getTisch(int tischNr) {
+		ArrayList<Tisch> tische = getTische();
+		for(Tisch t : tische) {
+			if(t.getTischNr() == tischNr)
+				return t;
+		}
+		return null;
 	}
 	
 	public void reservieren(Reservierung reservierung){
