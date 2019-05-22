@@ -8,11 +8,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
-import Restaurant.Fachlogik.Tischverwaltung.Reservierung;
 
 public class KundenDao implements IKundenDao{
 
-	private final String dateiName = "src/Restaurant/Datenhaltung/Kunden.ser";
+	private final String dateiName = "Kunden.ser";
 
 	@Override
 	public void speichern(ArrayList<Kunde> kunden) {

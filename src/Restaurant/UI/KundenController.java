@@ -6,7 +6,6 @@ import Restaurant.Fachlogik.Kundenverwaltung.Adresse;
 import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
 import Restaurant.Fachlogik.Kundenverwaltung.Kundenverwaltung;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
