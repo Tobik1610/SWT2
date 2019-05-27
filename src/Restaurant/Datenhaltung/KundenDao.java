@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
 
@@ -16,6 +17,36 @@ public class KundenDao implements IKundenDao{
 	@Override
 	public void speichern(ArrayList<Kunde> kunden) {
 
+		
+		// Database 
+		DatabaseConnection.getDbCon();
+		
+		for(int i=0; i < kunden.size(); i++)
+		{
+			
+			String query_adresse = "insert into adresse (adresse_id, ort, strasse, plz, hausnr) values (" +
+					kunden.get(i).getId() + ", '" +
+					kunden.get(i).getAdresse().getOrt() + "', '" +
+					kunden.get(i).getAdresse().getStrasse() + "', " +
+					kunden.get(i).getAdresse().getPlz() + ", " +
+					kunden.get(i).getAdresse().getHausNr() + ");";
+			
+			System.out.println(query_adresse);
+			
+			/*
+			try 
+			{
+				DatabaseConnection.getDbCon().insert(query_adresse);
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			*/
+		}
+		
+		
+		
+		// Serielle Speicherung
 		try {
 			FileOutputStream fos = new FileOutputStream(dateiName);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -35,7 +66,9 @@ public class KundenDao implements IKundenDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
+	
 
 	@Override
 	public ArrayList<Kunde> laden() {
