@@ -1,11 +1,14 @@
 package Restaurant.Fachlogik.Kundenverwaltung;
 
-import java.io.Serializable;
-
-public class Adresse implements Serializable {
+public class Adresse  {
 	
 	private String ort, strasse;
 	private int plz, hausNr;
+	
+	public Adresse()
+	{
+		
+	}
 	
 	public Adresse(String ort, int plz, String strasse, int hausNr) {
 		this.ort = ort;

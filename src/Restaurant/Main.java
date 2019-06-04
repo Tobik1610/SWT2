@@ -1,11 +1,19 @@
 package Restaurant;
 	
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import Restaurant.Datenhaltung.DatabaseConnection;
+import Restaurant.Fachlogik.Kundenverwaltung.Adresse;
+import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
+import Restaurant.Fachlogik.Tischverwaltung.EckigerTisch;
+import Restaurant.Fachlogik.Tischverwaltung.Tisch;
 import Restaurant.UI.MainView;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
 
 
 public class Main extends Application {
@@ -21,24 +29,31 @@ public class Main extends Application {
 
 
 // DATABASE CONNECTION TEST
+
 /*
 public class Main {
 	
 	public static void main(String[] args) 
 	{
-		DatabaseConnection.getDbCon();
-		String adresse = "insert into adresse (ort, strasse, plz, hausnr) values ('Selm', 'Lange Straße', 59379, 10)";
-		try 
-		{
-			DatabaseConnection.getDbCon().insert(adresse);
-		} 
-		catch (SQLException e) 
-		{
+		
+		// Tisch READ
+		
+		
+		// Tisch INSERT
+		/*
+		String insert = "INSERT INTO eckigerTisch (sitzplaetze, "
+				+ "anzReservierungen, x, y, breite, laenge) "
+				+ "VALUES (2,0,0,0,"
+				+ "80,80)";
+		
+		try {
+			DatabaseConnection.getDbCon().insert(insert);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
-	
 }
-	
 */
+	

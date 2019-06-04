@@ -10,11 +10,11 @@ public class DatabaseConnection
 	private Statement statement;
 	public static DatabaseConnection db;
 	
-	public DatabaseConnection()
+	private DatabaseConnection()
 	{
 		try 
 		{
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:9910/swt2", "root", "root");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:8888/easyReserve?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
 			System.out.println("Connection erfolgreich");	
 		}
 		catch(Exception e)

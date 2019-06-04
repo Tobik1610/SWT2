@@ -19,9 +19,6 @@ public class Kundenverwaltung {
 		kunden = kundenDao.laden();
 	}
 	
-	public void speicherDaten() {
-		kundenDao.speichern(kunden);
-	}
 	
 	public ArrayList<Kunde> getKunden(){
 		return kunden;
@@ -40,7 +37,7 @@ public class Kundenverwaltung {
 	}
 	
 	public void kundeAnlegen(Kunde kunde) {
-		kunden.add(kunde);
+		kundenDao.speichern(kunde);
 	}
 
 }

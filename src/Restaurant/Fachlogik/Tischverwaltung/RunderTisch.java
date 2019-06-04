@@ -9,6 +9,12 @@ public class RunderTisch extends Tisch {
 	private Circle kreis;
 	private Pane pane;
 
+	
+	public RunderTisch()
+	{
+		
+	}
+	
 	public RunderTisch(int tischNr, double x, double y, double radius) {
 		super(tischNr, x, y+radius);
 		this.radius = radius;
@@ -46,6 +52,11 @@ public class RunderTisch extends Tisch {
 		}
 		pane.getChildren().addAll(stuehle);
 		setGraphic(pane);
+	}
+	
+	public void setRadius(double radius)
+	{
+		this.radius = radius;
 	}
 
 }

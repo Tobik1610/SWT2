@@ -1,16 +1,18 @@
 package Restaurant.Fachlogik.Kundenverwaltung;
 
-import java.io.Serializable;
-
-public class Kunde implements Serializable {
+public class Kunde  {
 	
-	private static int ID = 1;
 	private int id;
 	private String vorname, nachname;
 	private Adresse adresse;
 	
 	public int getId() {
 		return id;
+	}
+
+	public void setId(int id)
+	{
+		this.id = id;
 	}
 	
 	public Adresse getAdresse() {
@@ -21,10 +23,21 @@ public class Kunde implements Serializable {
 		this.adresse = adresse;
 	}
 
-	public Kunde(String vorname, String nachname) {
-		this.id = ID++;
+	public Kunde()
+	{
+		
+	}
+	
+	public Kunde(String vorname, String nachname) {	
 		this.vorname = vorname;
 		this.nachname = nachname;
+	}
+	
+	public Kunde(int id, String vorname, String nachname, Adresse adresse) {
+		this.id = id;
+		this.vorname = vorname;
+		this.nachname = nachname;
+		this.adresse = adresse;
 	}
 
 	public String getVorname() {

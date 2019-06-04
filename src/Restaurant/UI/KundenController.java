@@ -120,9 +120,8 @@ public class KundenController {
 			kunde.setAdresse(adresse);
 		}
 		kundenverwaltung.kundeAnlegen(kunde);
-		kundenverwaltung.speicherDaten();
 
-		// Dialog schließen
+		// Dialog schlieï¿½en
 		tfVorname.getScene().getWindow().hide();
 	}
 

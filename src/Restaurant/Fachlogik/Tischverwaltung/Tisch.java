@@ -15,6 +15,11 @@ public abstract class Tisch extends Button {
 	protected double stuhlBreite = 30, stuhlTiefe = 10, stuhlAbstand = 5, stuhlBreiteGes;
 	protected Rectangle[] stuehle;
 
+	public Tisch()
+	{
+		
+	}
+	
 	public Tisch(int tischNr, double x, double y) {
 		this.tischNr = tischNr;
 		this.x = x;
@@ -50,6 +55,11 @@ public abstract class Tisch extends Button {
 		return tischNr;
 	}
 
+	public void setTischNr(int tischNr)
+	{
+		this.tischNr = tischNr;
+	}
+	
 	public int getSitzplaetze() {
 		return sitzplaetze;
 	}
@@ -81,6 +91,21 @@ public abstract class Tisch extends Button {
 		for (Rectangle stuhl : stuehle) {
 			stuhl.setFill(c);
 		}
+	}
+	
+	public void setAnzahlReservierungen(int n)
+	{
+		this.anzReservierungen = n;
+	}
+	
+	public void setX(double x)
+	{
+		this.x = x;
+	}
+	
+	public void setY(double y)
+	{
+		this.y = y;
 	}
 
 }
