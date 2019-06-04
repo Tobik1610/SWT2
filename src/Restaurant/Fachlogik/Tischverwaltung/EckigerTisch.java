@@ -10,26 +10,11 @@ public class EckigerTisch extends Tisch {
 	int[] anzahlStuehle = new int[4];
 	double[] belegt = new double[4];
 	private Pane pane;
-
-	
-	public EckigerTisch()
-	{
-		
-	}
 	
 	public EckigerTisch(int tischNr, double x, double y, double breite, double laenge) {
 		super(tischNr, x, y);
 		this.breite = breite;
 		this.laenge = laenge;
-		setPrefSize(breite, laenge);
-		erstelleDesign();
-	}
-	
-	public EckigerTisch(int tischNr, double x, double y, double breite, double laenge, int sitzplaetze) {
-		super(tischNr, x, y);
-		this.breite = breite;
-		this.laenge = laenge;
-		this.setSitzplaetze(sitzplaetze);
 		setPrefSize(breite, laenge);
 		erstelleDesign();
 	}
