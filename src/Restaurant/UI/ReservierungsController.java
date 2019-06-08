@@ -130,7 +130,7 @@ public class ReservierungsController {
 		ArrayList<Integer> tische = tischverwaltung.getFreieTische(datum, uhrzeit, personen);
 		cbTisch.getItems().clear();
 		
-		//Liste mit verfügbaren Tischen füllen und Buttons freischalten
+		//Liste mit verfï¿½gbaren Tischen fï¿½llen und Buttons freischalten
 		if(tische.size() > 0) {
 			for (int tisch : tische)
 				cbTisch.getItems().add("" + tisch);
@@ -169,9 +169,9 @@ public class ReservierungsController {
 		
 		// Reservieren
 		tischverwaltung.reservieren(reservierung);
-		tischverwaltung.speicherDaten();
+		//tischverwaltung.speicherDaten();
 
-		// Dialog schließen
+		// Dialog schlieï¿½en
 		tfPersonen.getScene().getWindow().hide();
 	}
 	

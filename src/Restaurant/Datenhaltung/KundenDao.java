@@ -42,6 +42,77 @@ public class KundenDao implements IKundenDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public Kunde ladeKunde(int kunde_id)
+	{
+		String readKunde = "select * from kunde where kunde_id=" + kunde_id;
+
+		try {
+			ResultSet rs = DatabaseConnection.getDbCon().get(readKunde);
+
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int spalten = rsmd.getColumnCount();
+
+			while (rs.next()) {
+
+				Adresse a = new Adresse();
+				Kunde k = new Kunde();
+				k.setAdresse(a);
+
+				for (int x = 1; x <= spalten; x++) 
+				{
+
+					switch (x) {
+					// Spalte ID
+					case 1:
+						k.setId(Integer.parseInt(rs.getString(x)));
+						break;
+					// Spalte Vorname
+					case 2:
+						k.setVorname(rs.getString(x));
+						break;
+					// Spalte Nachname
+					case 3:
+						k.setNachname(rs.getString(x));
+						break;
+
+					case 4: {
+						// wenn Adresse ausgefüllt und Daten nicht null
+						if (rs.getString(x) != null) {
+							a.setOrt(rs.getString(x));
+							break;
+						}
+						// ansonsten Abbrechen der Schleife bzw. DB-Spalte da Rest null-Einträge
+						else {
+							x = spalten + 1;
+							break;
+						}
+					}
+
+					case 5:
+						a.setStrasse(rs.getString(x));
+						break;
+					case 6:
+						a.setPlz(Integer.parseInt(rs.getString(x)));
+						break;
+					case 7:
+						a.setHausNr(Integer.parseInt(rs.getString(x)));
+						break;
+
+					default:
+						System.out.println("index out of bounce: außerhalb der max spaltenanzahl");
+
+					}
+
+				}
+				return k;
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
 
 	public ArrayList<Kunde> laden() {
 

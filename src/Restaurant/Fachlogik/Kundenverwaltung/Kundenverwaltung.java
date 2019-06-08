@@ -35,6 +35,7 @@ public class Kundenverwaltung {
 		}
 		return k;
 	}
+
 	
 	public void kundeAnlegen(Kunde kunde) {
 		kundenDao.speichern(kunde);

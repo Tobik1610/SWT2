@@ -14,8 +14,8 @@ public class DatabaseConnection
 	{
 		try 
 		{
-//			conn = DriverManager.getConnection("jdbc:mysql://localhost:8888/easyReserve?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/easyReserve?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Tobias1610");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:8888/easyReserve?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
+//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/easyReserve?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Tobias1610");
 			System.out.println("Connection erfolgreich");	
 		}
 		catch(Exception e)
@@ -45,4 +45,10 @@ public class DatabaseConnection
         return res;
 	}
 
+	public boolean delete(String query) throws SQLException
+	{
+        statement = db.conn.createStatement();
+        return statement.execute(query);
+	}
+	
 }

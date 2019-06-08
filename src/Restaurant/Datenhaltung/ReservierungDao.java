@@ -6,7 +6,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.time.LocalDate;
 import java.util.ArrayList;
+
+import Restaurant.Fachlogik.Uhrzeit;
+import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
 import Restaurant.Fachlogik.Tischverwaltung.Reservierung;
 
 public class ReservierungDao implements IReservierungDao {
@@ -14,49 +20,104 @@ public class ReservierungDao implements IReservierungDao {
 	private final String dateiName = "Reservierungen.ser";
 
 	@Override
-	public void speichern(ArrayList<Reservierung> reservierungen) {
-
-		try {
-			FileOutputStream fos = new FileOutputStream(dateiName);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			
-			oos.writeInt(reservierungen.size());
-			
-			for(Reservierung reservierung : reservierungen)
-				oos.writeObject(reservierung);
-			
-			oos.close();
-			fos.close();
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void speichern(Reservierung reservierung) {
 		
+
+		try 
+		{
+			
+			String query = "insert into reservierung (datum, uhrzeit, personen, kunde_id, tischNr) values ("
+					+ "\"" + reservierung.getDatum().toString() + "\", "
+					+ "\"" + reservierung.getUhrzeit().toString() + "\", "
+					//+ reservierung.getUhrzeit().getStunde() + "." + reservierung.getUhrzeit().getMinute() + ", "
+					+ "\"" + reservierung.getPersonen() + "\", "
+					//+ "null, "
+					+ reservierung.getKunde().getId() + ", "
+					+ reservierung.getTischNr() + "); ";
+			
+			System.out.println(query);
+			DatabaseConnection.getDbCon().insert(query);
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}	
+	}
+	
+	public void loeschen(Reservierung reservierung)
+	{
+		String query = "delete from reservierung where reservierung_id =" + reservierung.getId();
+		
+		try 
+		{
+			
+			DatabaseConnection.getDbCon().delete(query);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
 	}
 
 	@Override
 	public ArrayList<Reservierung> laden() {
+		
 		ArrayList<Reservierung> reservierungen = new ArrayList<Reservierung>();
 		
-		try {
-			FileInputStream fis = new FileInputStream(dateiName);
-			ObjectInputStream ois = new ObjectInputStream(fis);
+		String readReservierungen = "select * from reservierung";
+		
+		// Variablen zum Zwischenspeichern
+		int reservierung_id = 0, kunde_id = 0, tischNr = 0;
+		String datum = "", uhrzeit = "", personen = "";
+		
+		try 
+		{
+		
+			ResultSet rs = DatabaseConnection.getDbCon().get(readReservierungen);
+
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int spalten = rsmd.getColumnCount();
 			
-			int anzahl = ois.readInt();
-			
-			for(int i = 0; i < anzahl; i++)
-				reservierungen.add((Reservierung) ois.readObject());
-			
-			ois.close();
-			fis.close();
-			
-		} catch (Exception e)  {
+			while(rs.next())
+			{
+				
+				
+				for (int i = 1; i <= spalten; i++) 
+				{
+					switch (i) 
+					{
+						case 1: reservierung_id = Integer.parseInt(rs.getString(i)); break;
+						case 2: datum = rs.getString(i); break;
+						case 3: uhrzeit = rs.getString(i); break;
+						case 4: personen = rs.getString(i); break;
+						case 5: kunde_id = Integer.parseInt(rs.getString(i)); break;
+						case 6: tischNr = Integer.parseInt(rs.getString(i)); break;
+						default: System.out.println("bla bla ...");
+					}
+				}
+				
+				// erstelle LocalDate Objekt
+				LocalDate date = LocalDate.parse(datum);
+				
+				// erstelle Uhrzeit Objekt
+				Uhrzeit zeit = new Uhrzeit(Integer.parseInt(uhrzeit.toString().substring(0, 2)), 
+						Integer.parseInt(uhrzeit.toString().substring(3)));
+				
+				// lade kompletten Kunden
+				KundenDao kDao = new KundenDao();
+				Kunde k = kDao.ladeKunde(kunde_id);
+				
+				Reservierung res = new Reservierung(reservierung_id, date, zeit, personen, k, tischNr);
+				reservierungen.add(res);
+			}
+				
+		}
+		catch (Exception e)  
+		{
 			System.out.println("Keine Reservierungen ladbar");
 		}
+		
 		return reservierungen;
 	}
 

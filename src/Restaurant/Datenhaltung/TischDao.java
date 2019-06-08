@@ -138,6 +138,10 @@ public class TischDao implements ITischDao {
 
 	public void initDaten() {
 		tische = laden();
+		
+		tische.get(5).setRotate(90); 
+		tische.get(6).setRotate(90);
+		
 		/*
 		 * tische = new ArrayList<Tisch>();
 		 * 
@@ -146,13 +150,22 @@ public class TischDao implements ITischDao {
 		 */
 		/*
 		 * tische.add(new RunderTisch(2, 200, 0, 40)); tische.get(1).setSitzplaetze(5);
+		 * 
+		 * public EckigerTisch(int tischNr, double x, double y, double breite, double laenge)
 		 * tische.add(new EckigerTisch(3, 100, 50, 80, 80));
-		 * tische.get(2).setSitzplaetze(2); tische.add(new EckigerTisch(4, 0, 135, 100,
-		 * 100)); tische.get(3).setSitzplaetze(4); tische.add(new EckigerTisch(5, 180,
-		 * 135, 100, 100)); tische.get(4).setSitzplaetze(4); tische.add(new
-		 * EckigerTisch(6, 20, 230, 100, 160)); tische.get(5).setSitzplaetze(6);
-		 * tische.get(5).setRotate(90); tische.add(new EckigerTisch(6, 190, 230, 100,
-		 * 160)); tische.get(6).setSitzplaetze(6); tische.get(6).setRotate(90);
+		 * tische.get(2).setSitzplaetze(2); 
+		 * tische.add(new EckigerTisch(4, 0, 135, 100,
+		 * 100)); tische.get(3).setSitzplaetze(4); 
+		 * tische.add(new EckigerTisch(5, 180,
+		 * 135, 100, 100)); tische.get(4).setSitzplaetze(4); 
+		 * tische.add(newEckigerTisch(6, 20, 230, 100, 160)); 
+		 * tische.get(5).setSitzplaetze(6);
+		 * 
+		 * tische.get(5).setRotate(90); 
+		 * tische.add(new EckigerTisch(6, 190, 230, 100,
+		 * 160)); 
+		 * tische.get(6).setSitzplaetze(6); 
+		 * tische.get(6).setRotate(90);
 		 */
 	}
 

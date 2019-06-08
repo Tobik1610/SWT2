@@ -3,12 +3,16 @@ package Restaurant;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Restaurant.Datenhaltung.DatabaseConnection;
+import Restaurant.Datenhaltung.ReservierungDao;
+import Restaurant.Fachlogik.Uhrzeit;
 import Restaurant.Fachlogik.Kundenverwaltung.Adresse;
 import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
 import Restaurant.Fachlogik.Tischverwaltung.EckigerTisch;
+import Restaurant.Fachlogik.Tischverwaltung.Reservierung;
 import Restaurant.Fachlogik.Tischverwaltung.Tisch;
 import Restaurant.UI.MainView;
 import javafx.application.Application;
@@ -27,6 +31,21 @@ public class Main extends Application {
 	}
 }
 
+
+/*
+// TEST DB Reservierung SQL Abfragen
+public class Main {
+	public static void main (String[] args)
+	{
+		
+		ReservierungDao rdao = new ReservierungDao();
+		ArrayList<Reservierung> reservierungen = rdao.laden();
+		
+		System.out.println(reservierungen.get(0).getKunde().getVorname());
+	
+	}
+}
+*/
 
 // DATABASE CONNECTION TEST
 
