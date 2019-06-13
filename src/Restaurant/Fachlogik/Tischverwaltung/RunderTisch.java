@@ -9,8 +9,8 @@ public class RunderTisch extends Tisch {
 	private Circle kreis;
 	private Pane pane;
 	
-	public RunderTisch(int tischNr, double x, double y, double radius) {
-		super(tischNr, x, y+radius);
+	public RunderTisch(int tischNr, double x, double y, double radius, double rotation) {
+		super(tischNr, x, y+radius, rotation);
 		this.radius = radius;
 		this.umfang = 2 * Math.PI * radius;
 		setPrefSize(radius, radius);

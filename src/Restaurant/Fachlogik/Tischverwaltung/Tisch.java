@@ -8,22 +8,18 @@ public abstract class Tisch extends Button {
 
 	protected int tischNr;
 	protected int sitzplaetze;
-	protected int anzReservierungen;
 	protected Color farbe, stuhlFarbe;
 	protected double x, y;
 	protected double rand = 10;
 	protected double stuhlBreite = 30, stuhlTiefe = 10, stuhlAbstand = 5, stuhlBreiteGes;
 	protected Rectangle[] stuehle;
-
-	public Tisch()
-	{
-		
-	}
+	protected double rotation;
 	
-	public Tisch(int tischNr, double x, double y) {
+	public Tisch(int tischNr, double x, double y, double rotation) {
 		this.tischNr = tischNr;
 		this.x = x;
 		this.y = y;
+		this.rotation = rotation;
 		stuhlFarbe = new Color(0.2, 0.8, 0.2, 1);
 		farbe = new Color(0.713, 0.7, 0.827, 1);
 		stuhlBreiteGes = 2 * stuhlAbstand + stuhlBreite;
@@ -32,6 +28,7 @@ public abstract class Tisch extends Button {
 		setOpacity(1);
 		setStyle("-fx-background-color: #2E2E2E; ");
 		setText("" + tischNr);
+		setRotate(rotation);
 	}
 
 	public void setSitzplaetze(int sitzplaetze) {
@@ -62,40 +59,6 @@ public abstract class Tisch extends Button {
 	
 	public int getSitzplaetze() {
 		return sitzplaetze;
-	}
-
-	public void erhoeheAnzReservierungen() {
-		anzReservierungen++;
-		if (anzReservierungen <= 1)
-			setStuhlFarbe(Color.YELLOW);
-		else
-			setStuhlFarbe(Color.RED);
-	}
-
-	public void veringereAnzReservierungen() {
-		anzReservierungen--;
-		if (anzReservierungen < 1)
-			setStuhlFarbe(stuhlFarbe);
-		else if (anzReservierungen == 1)
-			setStuhlFarbe(Color.YELLOW);
-		else
-			setStuhlFarbe(Color.RED);
-	}
-
-	public void anzReservierungenZuruecksetzen() {
-		anzReservierungen = 0;
-		setStuhlFarbe(stuhlFarbe);
-	}
-
-	private void setStuhlFarbe(Color c) {
-		for (Rectangle stuhl : stuehle) {
-			stuhl.setFill(c);
-		}
-	}
-	
-	public void setAnzahlReservierungen(int n)
-	{
-		this.anzReservierungen = n;
 	}
 	
 	public void setX(double x)

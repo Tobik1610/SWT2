@@ -8,22 +8,27 @@ import Restaurant.Fachlogik.Kundenverwaltung.Kundenverwaltung;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import Restaurant.Observer;
+import Restaurant.Datenhaltung.DatenModell;
 
-public class KundenController {
+public class KundenController{
 
 	@FXML
 	private TextField tfVorname, tfNachname, tfOrt, tfPlz, tfStrasse, tfHausNr;
 	@FXML
 	private Button btnAnlegen, btnAdresse;
 
-	private Kundenverwaltung kundenverwaltung;
 	private Boolean bVorname = false, bNachname = false;
 	private Boolean bOrt = false, bPlz = false, bStrasse = false, bHausNr = false;
 	private Boolean bErweitert = false;
+	private DatenModell datenModell;
+	
+	public KundenController(DatenModell datenModell) {
+		this.datenModell = datenModell;
+	}
 
 	@FXML
 	public void initialize() {
-		kundenverwaltung = new Kundenverwaltung();
 
 		// Listener setzen
 		tfVorname.textProperty().addListener((observable, oldText, newText) -> {
@@ -119,7 +124,7 @@ public class KundenController {
 			Adresse adresse = new Adresse(tfOrt.getText(), plz, tfStrasse.getText(), hausNr);
 			kunde.setAdresse(adresse);
 		}
-		kundenverwaltung.kundeAnlegen(kunde);
+		datenModell.getKundenverwaltung().kundeAnlegen(kunde);
 
 		// Dialog schlie�en
 		tfVorname.getScene().getWindow().hide();

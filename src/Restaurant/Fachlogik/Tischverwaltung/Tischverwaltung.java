@@ -4,13 +4,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+
+import Restaurant.Subject;
 import Restaurant.Datenhaltung.IReservierungDao;
 import Restaurant.Datenhaltung.ITischDao;
 import Restaurant.Datenhaltung.ReservierungDao;
 import Restaurant.Datenhaltung.TischDao;
 import Restaurant.Fachlogik.Uhrzeit;
 
-public class Tischverwaltung {
+public class Tischverwaltung extends Subject{
 	
 	private ITischDao tischDao;
 	private IReservierungDao reservierungDao;
@@ -25,23 +27,8 @@ public class Tischverwaltung {
 	
 	public void loescheReservierung(Reservierung reservierung) {
 	
-		
 		this.reservierungDao.loeschen(reservierung);
 		ladeDaten();
-		/*
-		ArrayList<Reservierung> reservierungen = tischReservierungen.get(reservierung.getTischNr());
-		Reservierung r = null;
-		for(Reservierung res : reservierungen) {
-			if(res.getId() == reservierung.getId()) {
-				r = res;
-				break;
-			}
-		}
-		tischReservierungen.get(reservierung.getTischNr()).remove(r);
-		getTisch(reservierung.getTischNr()).veringereAnzReservierungen();
-			
-		speicherDaten();
-		*/
 	}
 	
 	public void ladeDaten() {
@@ -62,18 +49,11 @@ public class Tischverwaltung {
 				tischReservierungen.get(reservierung.getTischNr()).add(reservierung);
 			}
 		}	
+		benachrichtige();
 	}
 	
 	public void speicherDaten() {
-		/*
-		ArrayList<Reservierung> reservierungen = new ArrayList<Reservierung>();
-		
-		for(ArrayList<Reservierung> reservierung : tischReservierungen.values()) {
-			reservierungen.addAll(reservierung);
-		}
-		
-		
-		*/
+
 	}
 	
 	public ArrayList<Integer> getFreieTische(LocalDate datum, Uhrzeit uhrzeit, int personen){
@@ -118,13 +98,7 @@ public class Tischverwaltung {
 	public void reservieren(Reservierung reservierung){
 		
 		reservierungDao.speichern(reservierung);
-		/*
-		int tischNr = reservierung.getTischNr();
-		ArrayList<Tisch> tische = tischDao.laden();
-		
-		if(tischNr <= tischReservierungen.size())
-			tischReservierungen.get(tischNr).add(reservierung);
-			*/
+		ladeDaten();
 	}
 	
 	public ArrayList<Reservierung> getReservierungen(){

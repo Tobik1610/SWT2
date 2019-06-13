@@ -1,23 +1,14 @@
 package Restaurant.Datenhaltung;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import Restaurant.Fachlogik.Uhrzeit;
 import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
 import Restaurant.Fachlogik.Tischverwaltung.Reservierung;
 
 public class ReservierungDao implements IReservierungDao {
-	
-	private final String dateiName = "Reservierungen.ser";
 
 	@Override
 	public void speichern(Reservierung reservierung) {
