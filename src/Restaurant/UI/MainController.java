@@ -129,4 +129,13 @@ public class MainController implements Observer {
 	public void aktualiseren() {
 		reservierungenAktualisieren();
 	}
+	
+	public void onKundenZeigen() {
+		try {
+			new KundenUebersichtView(datenModell);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

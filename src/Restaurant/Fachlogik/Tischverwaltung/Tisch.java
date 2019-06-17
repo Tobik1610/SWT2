@@ -15,11 +15,12 @@ public abstract class Tisch extends Button {
 	protected Rectangle[] stuehle;
 	protected double rotation;
 	
-	public Tisch(int tischNr, double x, double y, double rotation) {
+	public Tisch(int tischNr, double x, double y, double rotation, int sitzplaetze) {
 		this.tischNr = tischNr;
 		this.x = x;
 		this.y = y;
 		this.rotation = rotation;
+		this.sitzplaetze = sitzplaetze;
 		stuhlFarbe = new Color(0.2, 0.8, 0.2, 1);
 		farbe = new Color(0.713, 0.7, 0.827, 1);
 		stuhlBreiteGes = 2 * stuhlAbstand + stuhlBreite;
@@ -46,7 +47,7 @@ public abstract class Tisch extends Button {
 
 	public abstract int getMaxSitzplaetze();
 
-	public abstract void verteileStuehle();
+	protected abstract void verteileStuehle();
 
 	public int getTischNr() {
 		return tischNr;

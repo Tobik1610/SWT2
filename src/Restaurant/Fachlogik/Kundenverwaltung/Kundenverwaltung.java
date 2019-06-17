@@ -37,7 +37,6 @@ public class Kundenverwaltung extends Subject{
 		}
 		return k;
 	}
-
 	
 	public void kundeAnlegen(Kunde kunde) {
 		kundenDao.speichern(kunde);

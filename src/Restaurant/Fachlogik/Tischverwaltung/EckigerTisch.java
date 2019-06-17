@@ -11,12 +11,13 @@ public class EckigerTisch extends Tisch {
 	double[] belegt = new double[4];
 	private Pane pane;
 	
-	public EckigerTisch(int tischNr, double x, double y, double breite, double laenge, double rotation) {
-		super(tischNr, x, y, rotation);
+	public EckigerTisch(int tischNr, double x, double y, double breite, double laenge, double rotation, int sitzplaetze) {
+		super(tischNr, x, y, rotation, sitzplaetze);
 		this.breite = breite;
 		this.laenge = laenge;
 		setPrefSize(breite, laenge);
 		erstelleDesign();
+		setSitzplaetze(sitzplaetze);
 	}
 
 	@Override

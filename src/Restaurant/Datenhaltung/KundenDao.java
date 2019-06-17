@@ -57,7 +57,6 @@ public class KundenDao implements IKundenDao {
 
 				Adresse a = new Adresse();
 				Kunde k = new Kunde();
-				k.setAdresse(a);
 
 				for (int x = 1; x <= spalten; x++) 
 				{
@@ -105,6 +104,8 @@ public class KundenDao implements IKundenDao {
 					}
 
 				}
+				if(a.getOrt() != null)
+					k.setAdresse(a);
 				return k;
 			}
 
@@ -132,7 +133,6 @@ public class KundenDao implements IKundenDao {
 
 				Adresse a = new Adresse();
 				Kunde k = new Kunde();
-				k.setAdresse(a);
 
 				for (int x = 1; x <= spalten; x++) {
 
@@ -153,6 +153,8 @@ public class KundenDao implements IKundenDao {
 					case 4: {
 						// wenn Adresse ausgefüllt und Daten nicht null
 						if (rs.getString(x) != null) {
+							a = new Adresse();
+							k.setAdresse(a);
 							a.setOrt(rs.getString(x));
 							break;
 						}
@@ -179,6 +181,9 @@ public class KundenDao implements IKundenDao {
 					}
 
 				}
+				if(a.getOrt() != null)
+					k.setAdresse(a);
+				
 				kunden.add(k);
 			}
 

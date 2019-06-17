@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<Pane prefHeight="482.0" prefWidth="819.0" style="-fx-background-color: #2E2E2E;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="73.0" layoutY="38.0" mnemonicParsing="false" onAction="#onStartseite" text="&lt;" />
+      <Pane layoutX="73.0" layoutY="82.0" prefHeight="338.0" prefWidth="681.0" style="-fx-background-color: #F2F2F2; -fx-border-color: grey; -fx-border-radius: 16px; -fx-background-radius: 16px;">
+         <children>
+            <Label fx:id="tischLabel" layoutX="314.0" layoutY="14.0" text="Kunden">
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+            </Label>
+            <ListView fx:id="lvKunden" editable="true" layoutX="4.0" layoutY="46.0" prefHeight="285.0" prefWidth="290.0" style="-fx-background-color: ffb6a8;" />
+            <Pane layoutX="294.0" layoutY="46.0" prefHeight="285.0" prefWidth="380.0" style="-fx-background-color: #ffe0db;">
+               <children>
+                  <Label fx:id="lName" layoutX="35.0" layoutY="20.0" />
+                  <Label fx:id="lStrasse" layoutX="35.0" layoutY="60.0" />
+                  <Label fx:id="lStadt" layoutX="35.0" layoutY="100.0" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <ImageView fitHeight="33.0" fitWidth="32.0" layoutX="704.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Ressourcen/Bilder/kunde.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="704.0" layoutY="51.0" mnemonicParsing="false" onAction="#onNeuerKunde" opacity="0.0" prefHeight="25.0" prefWidth="32.0">
+         <tooltip>
+            <Tooltip text="Neuen Kunden anlegen" />
+         </tooltip>
+      </Button>
+   </children>
+</Pane>
