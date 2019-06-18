@@ -2,13 +2,9 @@ package Restaurant.UI;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import Restaurant.Observer;
 import Restaurant.Datenhaltung.DatenModell;
+import Restaurant.Fachlogik.Observer;
 import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;

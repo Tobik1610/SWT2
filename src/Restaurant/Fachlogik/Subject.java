@@ -1,4 +1,4 @@
-package Restaurant;
+package Restaurant.Fachlogik;
 
 import java.util.ArrayList;
 

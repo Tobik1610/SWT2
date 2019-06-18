@@ -5,14 +5,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import Restaurant.Observer;
 import Restaurant.Datenhaltung.DatenModell;
+import Restaurant.Fachlogik.Observer;
 import Restaurant.Fachlogik.Uhrzeit;
 import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
-import Restaurant.Fachlogik.Kundenverwaltung.Kundenverwaltung;
 import Restaurant.Fachlogik.Tischverwaltung.Reservierung;
-import Restaurant.Fachlogik.Tischverwaltung.Tisch;
-import Restaurant.Fachlogik.Tischverwaltung.Tischverwaltung;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;

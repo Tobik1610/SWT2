@@ -4,8 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-
-import Restaurant.Subject;
+import Restaurant.Fachlogik.Subject;
 import Restaurant.Datenhaltung.IReservierungDao;
 import Restaurant.Datenhaltung.ITischDao;
 import Restaurant.Datenhaltung.ReservierungDao;

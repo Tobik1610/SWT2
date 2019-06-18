@@ -1,15 +1,12 @@
 package Restaurant.UI;
 
 import java.util.regex.Pattern;
-
+import Restaurant.Datenhaltung.DatenModell;
 import Restaurant.Fachlogik.Kundenverwaltung.Adresse;
 import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
-import Restaurant.Fachlogik.Kundenverwaltung.Kundenverwaltung;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import Restaurant.Observer;
-import Restaurant.Datenhaltung.DatenModell;
 
 public class KundenController{
 

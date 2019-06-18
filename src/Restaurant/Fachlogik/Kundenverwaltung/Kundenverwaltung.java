@@ -1,8 +1,7 @@
 package Restaurant.Fachlogik.Kundenverwaltung;
 
 import java.util.ArrayList;
-
-import Restaurant.Subject;
+import Restaurant.Fachlogik.Subject;
 import Restaurant.Datenhaltung.IKundenDao;
 import Restaurant.Datenhaltung.KundenDao;
 
