@@ -1,11 +1,11 @@
 package Restaurant.Fachlogik.Kundenverwaltung;
 
 import java.util.ArrayList;
-
+import Restaurant.Fachlogik.Subject;
 import Restaurant.Datenhaltung.IKundenDao;
 import Restaurant.Datenhaltung.KundenDao;
 
-public class Kundenverwaltung {
+public class Kundenverwaltung extends Subject{
 	
 	private IKundenDao kundenDao;
 	private ArrayList<Kunde> kunden;
@@ -17,11 +17,9 @@ public class Kundenverwaltung {
 	
 	public void ladeDaten() {
 		kunden = kundenDao.laden();
+		benachrichtige();
 	}
 	
-	public void speicherDaten() {
-		kundenDao.speichern(kunden);
-	}
 	
 	public ArrayList<Kunde> getKunden(){
 		return kunden;
@@ -40,7 +38,8 @@ public class Kundenverwaltung {
 	}
 	
 	public void kundeAnlegen(Kunde kunde) {
-		kunden.add(kunde);
+		kundenDao.speichern(kunde);
+		ladeDaten();
 	}
 
 }

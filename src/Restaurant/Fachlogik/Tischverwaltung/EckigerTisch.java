@@ -10,25 +10,22 @@ public class EckigerTisch extends Tisch {
 	int[] anzahlStuehle = new int[4];
 	double[] belegt = new double[4];
 	private Pane pane;
-
-	public EckigerTisch(int tischNr, double x, double y, double breite, double laenge) {
-		super(tischNr, x, y);
+	
+	public EckigerTisch(int tischNr, double x, double y, double breite, double laenge, double rotation, int sitzplaetze) {
+		super(tischNr, x, y, rotation, sitzplaetze);
 		this.breite = breite;
 		this.laenge = laenge;
 		setPrefSize(breite, laenge);
 		erstelleDesign();
+		setSitzplaetze(sitzplaetze);
 	}
 
 	@Override
 	public void erstelleDesign() {
-//		Text text = new Text("" + tischNr);
-//		text.setX(rand+stuhlTiefe);
-//		text.setY(rand+stuhlTiefe+10);
 		rechteck = new Rectangle(rand, rand, breite - (rand * 2), laenge - (rand * 2));
 		rechteck.setFill(farbe);
 		pane = new Pane();
 		pane.getChildren().add(rechteck);
-//		pane.getChildren().addAll(rechteck, text);
 		setGraphic(pane);
 	}
 
@@ -37,6 +34,16 @@ public class EckigerTisch extends Tisch {
 		for (int i = 0; i < stuehle.length; i++) {
 			seite = stuhlHinzufuegen(seite);
 		}
+	}
+	
+	public void setBreite(double b)
+	{
+		this.breite = b;
+	}
+	
+	public void setLaenge(double l)
+	{
+		this.laenge = l;
 	}
 
 	private int stuhlHinzufuegen(int seite) {

@@ -8,13 +8,14 @@ public class RunderTisch extends Tisch {
 	private double radius, umfang;
 	private Circle kreis;
 	private Pane pane;
-
-	public RunderTisch(int tischNr, double x, double y, double radius) {
-		super(tischNr, x, y+radius);
+	
+	public RunderTisch(int tischNr, double x, double y, double radius, double rotation, int sitzplaetze) {
+		super(tischNr, x, y+radius, rotation, sitzplaetze);
 		this.radius = radius;
-		umfang = 2 * Math.PI * radius;
+		this.umfang = 2 * Math.PI * radius;
 		setPrefSize(radius, radius);
 		erstelleDesign();
+		setSitzplaetze(sitzplaetze);
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class RunderTisch extends Tisch {
 	}
 
 	@Override
-	public void verteileStuehle() {
+	protected void verteileStuehle() {
 		double winkel = 360 / sitzplaetze;
 		double radwinkel, rotation;
 		for (int i = 0; i < stuehle.length; i++) {
@@ -46,6 +47,11 @@ public class RunderTisch extends Tisch {
 		}
 		pane.getChildren().addAll(stuehle);
 		setGraphic(pane);
+	}
+	
+	public void setRadius(double radius)
+	{
+		this.radius = radius;
 	}
 
 }

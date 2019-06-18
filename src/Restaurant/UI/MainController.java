@@ -3,9 +3,10 @@ package Restaurant.UI;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import Restaurant.Datenhaltung.DatenModell;
+import Restaurant.Fachlogik.Observer;
 import Restaurant.Fachlogik.Tischverwaltung.Reservierung;
 import Restaurant.Fachlogik.Tischverwaltung.Tisch;
-import Restaurant.Fachlogik.Tischverwaltung.Tischverwaltung;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,7 +18,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class MainController {
+public class MainController implements Observer {
 
 	@FXML
 	private Button btnZurueck, btnLoeschen;
@@ -34,12 +35,17 @@ public class MainController {
 	@FXML
 	private Pane paneTische;
 
-	private Tischverwaltung tischverwaltung;
 	private ArrayList<Reservierung> reservierungen;
+	private ArrayList<Tisch> tische;
 	private int aktiverTisch;
+	private DatenModell datenModell;
 
-	public MainController() {
-		tischverwaltung = new Tischverwaltung();
+	public MainController(DatenModell datenModell) {
+		this.datenModell = datenModell;
+		this.datenModell.getTischverwaltung().fuegeObserverHinzu(this);
+		tische = new ArrayList<>();
+		tische = datenModell.getTischverwaltung().getTische();
+		reservierungen = new ArrayList<>();
 	}
 
 	@FXML
@@ -51,7 +57,7 @@ public class MainController {
 
 		// Handler für Tische setzen
 		TischHandler tischHandler = new TischHandler();
-		for(Tisch tisch : tischverwaltung.getTische()) {
+		for (Tisch tisch : tische) {
 			tisch.setOnAction(tischHandler);
 			paneTische.getChildren().add(tisch);
 		}
@@ -59,46 +65,31 @@ public class MainController {
 		btnZurueck.setVisible(false);
 
 		reservierungenAktualisieren();
-		
-		btnEinstellungen.setVisible(false);
 	}
 
-	private void farbenAktualisieren() {
-		for(Tisch tisch : tischverwaltung.getTische())
-			tisch.anzReservierungenZuruecksetzen();
-		
-		for(Reservierung r : reservierungen)
-			tischverwaltung.getTisch(r.getTischNr()).erhoeheAnzReservierungen();
-	}
-	
 	public void reservierungenAktualisieren() {
 		// Datum aus Datepicker holen
 		LocalDate datum = dpDatum.getValue();
 
-		if (tischverwaltung != null) {
-			// Daten laden und Liste reseten
-			tischverwaltung.ladeDaten();
-			tischListView.getItems().clear();
+		tischListView.getItems().clear();
 
-			if (aktiverTisch == 0) {
-				// Reservierungen zum allen Tischen holen
-				reservierungen = tischverwaltung.getReservierungen(datum);
-				for (Reservierung reservierung : reservierungen)
-					tischListView.getItems().add(reservierung.toString());
-			} else {
-				// Reservierungen zum ausgewählten Tisch holen
-				reservierungen = tischverwaltung.getReservierungen(datum, aktiverTisch);
-				for (Reservierung reservierung : reservierungen)
-					tischListView.getItems().add(reservierung.toStringOhneTisch());
-			}
+		if (aktiverTisch == 0) {
+			// Reservierungen zum allen Tischen holen
+			reservierungen = datenModell.getTischverwaltung().getReservierungen(datum);
+			for (Reservierung reservierung : reservierungen)
+				tischListView.getItems().add(reservierung.toString());
+		} else {
+			// Reservierungen zum ausgewählten Tisch holen
+			reservierungen = datenModell.getTischverwaltung().getReservierungen(datum, aktiverTisch);
+			for (Reservierung reservierung : reservierungen)
+				tischListView.getItems().add(reservierung.toStringOhneTisch());
 		}
-		//farbenAktualisieren();
+
 	}
 
 	public void onReservieren() {
 		try {
-			new ReservierungsView();
-			reservierungenAktualisieren();
+			new ReservierungsView(datenModell);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,17 +107,7 @@ public class MainController {
 	public void onReservierungLoeschen() {
 		int index = tischListView.getSelectionModel().getSelectedIndex();
 		if (index != -1) {
-			tischverwaltung.loescheReservierung(reservierungen.get(index));
-			reservierungenAktualisieren();
-		}
-	}
-
-	public void onLayoutBearbeiten() {
-		try {
-			new BauView();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			datenModell.getTischverwaltung().loescheReservierung(reservierungen.get(index));
 		}
 	}
 
@@ -142,5 +123,19 @@ public class MainController {
 			btnZurueck.setVisible(true);
 		}
 
+	}
+
+	@Override
+	public void aktualiseren() {
+		reservierungenAktualisieren();
+	}
+	
+	public void onKundenZeigen() {
+		try {
+			new KundenUebersichtView(datenModell);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -7,7 +7,7 @@ import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
 
 public class Reservierung implements Serializable {
 
-	private static int ID = 1;
+	//private static int ID = 1;
 	private int id;
 	private LocalDate datum;
 	private Uhrzeit uhrzeit;
@@ -15,8 +15,22 @@ public class Reservierung implements Serializable {
 	private Kunde kunde;
 	private int tischNr;
 
+	
+	public Reservierung()
+	{
+		
+	}
+	
 	public Reservierung(LocalDate datum, Uhrzeit uhrzeit, String personen, Kunde kunde, int tischNr) {
-		this.id = ID++;
+		this.datum = datum;
+		this.uhrzeit = uhrzeit;
+		this.personen = personen;
+		this.kunde = kunde;
+		this.tischNr = tischNr;
+	}
+	
+	public Reservierung(int id, LocalDate datum, Uhrzeit uhrzeit, String personen, Kunde kunde, int tischNr) {
+		this.id = id;
 		this.datum = datum;
 		this.uhrzeit = uhrzeit;
 		this.personen = personen;

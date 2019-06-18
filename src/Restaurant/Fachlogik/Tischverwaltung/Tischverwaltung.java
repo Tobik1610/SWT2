@@ -4,13 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import Restaurant.Fachlogik.Subject;
 import Restaurant.Datenhaltung.IReservierungDao;
 import Restaurant.Datenhaltung.ITischDao;
 import Restaurant.Datenhaltung.ReservierungDao;
 import Restaurant.Datenhaltung.TischDao;
 import Restaurant.Fachlogik.Uhrzeit;
 
-public class Tischverwaltung {
+public class Tischverwaltung extends Subject{
 	
 	private ITischDao tischDao;
 	private IReservierungDao reservierungDao;
@@ -24,21 +25,18 @@ public class Tischverwaltung {
 	}
 	
 	public void loescheReservierung(Reservierung reservierung) {
-		ArrayList<Reservierung> reservierungen = tischReservierungen.get(reservierung.getTischNr());
-		Reservierung r = null;
-		for(Reservierung res : reservierungen) {
-			if(res.getId() == reservierung.getId()) {
-				r = res;
-				break;
-			}
-		}
-		tischReservierungen.get(reservierung.getTischNr()).remove(r);
-		getTisch(reservierung.getTischNr()).veringereAnzReservierungen();
-			
-		speicherDaten();
+	
+		this.reservierungDao.loeschen(reservierung);
+		ladeDaten();
 	}
 	
 	public void ladeDaten() {
+		
+		if(tischReservierungen != null)
+		{
+			tischReservierungen.clear();
+		}
+		
 		ArrayList<Tisch> tische = tischDao.laden();
 		ArrayList<Reservierung> reservierungen = reservierungDao.laden();
 		
@@ -50,16 +48,11 @@ public class Tischverwaltung {
 				tischReservierungen.get(reservierung.getTischNr()).add(reservierung);
 			}
 		}	
+		benachrichtige();
 	}
 	
 	public void speicherDaten() {
-		ArrayList<Reservierung> reservierungen = new ArrayList<Reservierung>();
-		
-		for(ArrayList<Reservierung> reservierung : tischReservierungen.values()) {
-			reservierungen.addAll(reservierung);
-		}
-		
-		reservierungDao.speichern(reservierungen);
+
 	}
 	
 	public ArrayList<Integer> getFreieTische(LocalDate datum, Uhrzeit uhrzeit, int personen){
@@ -68,7 +61,7 @@ public class Tischverwaltung {
 		ArrayList<Integer> tischNummern = new ArrayList<Integer>();
 		ArrayList<Reservierung> reservierungen = getReservierungen(datum);
 		
-		//Auf Freiheit überprüfen
+		//Auf Freiheit ï¿½berprï¿½fen
 		for(Reservierung res : reservierungen) {
 			if(freie[res.getTischNr()-1]) {
 				int zeit1 = res.getUhrzeit().getStunde() * 60 + res.getUhrzeit().getMinute();
@@ -78,7 +71,7 @@ public class Tischverwaltung {
 					freie[res.getTischNr()-1] = false;
 			}			
 		}
-		//Auf Personenanzahl überprüfen
+		//Auf Personenanzahl ï¿½berprï¿½fen
 		ArrayList<Tisch> tische = getTische();
 		
 		for(int i = 0; i < freie.length; i++)
@@ -102,11 +95,9 @@ public class Tischverwaltung {
 	}
 	
 	public void reservieren(Reservierung reservierung){
-		int tischNr = reservierung.getTischNr();
-		ArrayList<Tisch> tische = tischDao.laden();
 		
-		if(tischNr <= tischReservierungen.size())
-			tischReservierungen.get(tischNr).add(reservierung);
+		reservierungDao.speichern(reservierung);
+		ladeDaten();
 	}
 	
 	public ArrayList<Reservierung> getReservierungen(){

@@ -6,7 +6,8 @@ import Restaurant.Fachlogik.Tischverwaltung.Reservierung;
 
 public interface IReservierungDao {
 	
-	public void speichern(ArrayList<Reservierung> reservierungen);
+	public void speichern(Reservierung reservierung);
 	public ArrayList<Reservierung> laden();
+	public void loeschen(Reservierung reservierung);
 
 }

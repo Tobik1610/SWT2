@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+
+import Restaurant.Datenhaltung.DatenModell;
+import Restaurant.Fachlogik.Observer;
 import Restaurant.Fachlogik.Uhrzeit;
 import Restaurant.Fachlogik.Kundenverwaltung.Kunde;
-import Restaurant.Fachlogik.Kundenverwaltung.Kundenverwaltung;
 import Restaurant.Fachlogik.Tischverwaltung.Reservierung;
-import Restaurant.Fachlogik.Tischverwaltung.Tischverwaltung;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -20,7 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.util.Callback;
 
-public class ReservierungsController {
+public class ReservierungsController implements Observer {
 
 	@FXML
 	private TextField tfPersonen;
@@ -33,16 +34,18 @@ public class ReservierungsController {
 	@FXML
 	private ComboBox<Kunde> cbKunde;
 
-	private Tischverwaltung tischverwaltung;
-	private Kundenverwaltung kundenverwaltung;
+	private ArrayList<Kunde> kunden;
+	private ArrayList<Integer> tische;
 	private Boolean bName = false, bPersonen = false, bDatum = true;
 	private SuchComboBox<Kunde> suchComboBox;
+	private DatenModell datenModell;
 
-	public ReservierungsController() {
-		this.tischverwaltung = new Tischverwaltung();
-		this.kundenverwaltung = new Kundenverwaltung();
-		kundenverwaltung.ladeDaten();
-		tischverwaltung.ladeDaten();
+	public ReservierungsController(DatenModell datenModell) {
+		this.datenModell = datenModell;
+		this.datenModell.getTischverwaltung().fuegeObserverHinzu(this);
+		this.datenModell.getKundenverwaltung().fuegeObserverHinzu(this);
+		kunden = new ArrayList<>();
+		tische = new ArrayList<>();
 	}
 
 	@FXML
@@ -56,8 +59,8 @@ public class ReservierungsController {
 		dpDatum.setValue(LocalDate.now());
 
 		tfPersonen.textProperty().addListener((observable, oldText, newText) -> {
-			String regex = "\\d{0,1}";//Einstellige Ziffer
-			if(Pattern.matches(regex,newText)) {
+			String regex = "\\d{0,1}";// Einstellige Ziffer
+			if (Pattern.matches(regex, newText)) {
 
 				if (!newText.isEmpty())
 					bPersonen = true;
@@ -65,80 +68,87 @@ public class ReservierungsController {
 					bPersonen = false;
 
 				eingabenPruefen();
-	
-			}else
+
+			} else
 				tfPersonen.setText(oldText);
 		});
-		
+
 		cbStunde.valueProperty().addListener((observable, oldValue, newValue) -> {
 			eingabenPruefen();
 		});
-		
+
 		cbMinute.valueProperty().addListener((observable, oldValue, newValue) -> {
 			eingabenPruefen();
 		});
-		
+
 		dpDatum.valueProperty().addListener((observable, oldValue, newValue) -> {
-			if(newValue != null)
+			if (newValue != null)
 				bDatum = true;
 			else
 				bDatum = false;
-			
+
 			eingabenPruefen();
 		});
-		
-		//Kunden ComboBox
+
+		// Kunden ComboBox
 		cbKunde.setTooltip(new Tooltip());
 		cbKunde.setCellFactory(new Callback<ListView<Kunde>, ListCell<Kunde>>() {
-			
+
 			@Override
 			public ListCell<Kunde> call(ListView<Kunde> k) {
 				return new ListCell<Kunde>() {
-					@Override protected void updateItem(Kunde kunde, boolean empty) {
-                        super.updateItem(kunde, empty);
-                        
-                        if (kunde == null || empty) {
-                            setText("");
-                        } else {
-                            String str = kunde.getVorname() + " " + kunde.getNachname();
-                            setText(str);
-                        }
-                   }
+					@Override
+					protected void updateItem(Kunde kunde, boolean empty) {
+						super.updateItem(kunde, empty);
+
+						if (kunde == null || empty) {
+							setText("");
+						} else {
+							String str = kunde.getVorname() + " " + kunde.getNachname();
+							setText(str);
+						}
+					}
 				};
 			}
 		});
-		aktualisiereKunden();
-		
+
 		cbKunde.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-			if(newValue != null)
+			if (newValue != null)
 				bName = true;
 			else
 				bName = false;
-			
+
 			eingabenPruefen();
 		});
+
+		aktualiseren();
 	}
 
 	public void reservierungAktivieren() {
-		//Daten aus den Controls holen
+		freieTischeAktualisieren();
+		
+		btnReservieren.setDisable(false);
+	}
+
+	public void freieTischeAktualisieren() {
+		// Daten aus den Controls holen
 		LocalDate datum = dpDatum.getValue();
 		Uhrzeit uhrzeit = new Uhrzeit(Integer.parseInt(cbStunde.getSelectionModel().getSelectedItem()),
-				Integer.parseInt(cbMinute.getSelectionModel().getSelectedItem())); 
+				Integer.parseInt(cbMinute.getSelectionModel().getSelectedItem()));
 		int personen = Integer.parseInt(tfPersonen.getText());
 		
-		//Freie Tische holen
-		ArrayList<Integer> tische = tischverwaltung.getFreieTische(datum, uhrzeit, personen);
+		// Freie Tische holen
+		tische = datenModell.getTischverwaltung().getFreieTische(datum, uhrzeit, personen);
 		cbTisch.getItems().clear();
-		
-		//Liste mit verfügbaren Tischen füllen und Buttons freischalten
-		if(tische.size() > 0) {
+
+		// Liste mit verfï¿½gbaren Tischen fï¿½llen und Buttons freischalten
+		if (tische.size() > 0) {
 			for (int tisch : tische)
 				cbTisch.getItems().add("" + tisch);
 
 			cbTisch.getSelectionModel().select(0);
-			
+
 			cbTisch.setDisable(false);
-			btnReservieren.setDisable(false);
 		}
 	}
 
@@ -153,46 +163,50 @@ public class ReservierungsController {
 		else
 			reservierungDeaktivieren();
 	}
-	
+
 	public Boolean istReservierbar() {
 		return bName && bPersonen && bDatum;
 	}
 
-	public void onReservieren(){
-		//Uhrzeit aus den Controls holen
+	public void onReservieren() {
+		// Uhrzeit aus den Controls holen
 		Uhrzeit uhrzeit = new Uhrzeit(Integer.parseInt(cbStunde.getSelectionModel().getSelectedItem()),
 				Integer.parseInt(cbMinute.getSelectionModel().getSelectedItem()));
-		
-		//Reservierung erstellen
-		Reservierung reservierung = new Reservierung(dpDatum.getValue(), uhrzeit, tfPersonen.getText(),
-				cbKunde.getSelectionModel().getSelectedItem(), Integer.parseInt(cbTisch.getSelectionModel().getSelectedItem()));
-		
-		// Reservieren
-		tischverwaltung.reservieren(reservierung);
-		tischverwaltung.speicherDaten();
 
-		// Dialog schließen
+		// Reservierung erstellen
+		Reservierung reservierung = new Reservierung(dpDatum.getValue(), uhrzeit, tfPersonen.getText(),
+				cbKunde.getSelectionModel().getSelectedItem(),
+				Integer.parseInt(cbTisch.getSelectionModel().getSelectedItem()));
+
+		// Reservieren
+		datenModell.getTischverwaltung().reservieren(reservierung);
+
+		// Dialog schlieï¿½en
 		tfPersonen.getScene().getWindow().hide();
 	}
-	
+
 	public void aktualisiereKunden() {
-		kundenverwaltung.ladeDaten();
-		
+		kunden = datenModell.getKundenverwaltung().getKunden();
+
 		cbKunde.getItems().clear();
-		
-		for(Kunde kunde : kundenverwaltung.getKunden())
+
+		for (Kunde kunde : kunden)
 			cbKunde.getItems().add(kunde);
-		
+
 		suchComboBox = new SuchComboBox<>(cbKunde);
 	}
-	
+
 	public void onNeuerKunde() {
 		try {
-			new KundenView();
-			aktualisiereKunden();
+			new KundenView(datenModell);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void aktualiseren() {
+		aktualisiereKunden();
 	}
 }
